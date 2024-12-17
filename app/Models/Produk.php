@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Produk extends Model
 {
@@ -16,14 +18,24 @@ class Produk extends Model
         'nama_produk',
         'deskripsi_produk',
         'gambar_produk',
-        'kategori_produk_id',
+        'harga',
+        'ukuran',
+        'kategori_produk_id'
     ];
 
     /**
      * Relasi ke KategoriProduk.
      */
-    public function kategori()
+    public function kategori(): BelongsTo
     {
         return $this->belongsTo(KategoriProduk::class, 'kategori_produk_id');
+    }
+
+    /**
+     * Relasi ke PesananProduk.
+     */
+    public function pesanan(): HasMany
+    {
+        return $this->hasMany(PesananProduk::class);
     }
 }

@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('produk', function (Blueprint $table) {
             $table->id();
             $table->string('nama_produk');
-            $table->text('deskripsi_produk')->nullable();
+            $table->text('deskripsi_produk');
+            $table->string('gambar_produk');
+            $table->decimal('harga', 15, 2);  // Kolom baru
+            $table->string('ukuran');         // Kolom baru
             $table->foreignId('kategori_produk_id')->constrained('kategori_produk')->onDelete('cascade');
-            $table->string('gambar_produk')->nullable();
             $table->timestamps();
         });
     }
